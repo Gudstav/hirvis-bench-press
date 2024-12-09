@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <WorkoutProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/hirvis-bench-press">
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<OneRepMaxForm />} />
