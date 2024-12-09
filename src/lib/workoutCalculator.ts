@@ -1,4 +1,4 @@
-import { Workout } from '@/types/workout';
+import { Sets, Workout } from '@/types/workout';
 import { roundToNearestPlate } from './utils';
 
 export function generateWorkoutPlan(oneRepMax: number): Workout[] {
@@ -14,18 +14,20 @@ export function generateWorkoutPlan(oneRepMax: number): Workout[] {
       const weightPercentage = 70 + percentageIncrease;
 
       workouts.push({
-        id: i.toString(),
+        id: i + 1,
         reps: setCount,
         setCount: setCount,
+        sets: generateWorkoutSets(setCount),
         weight: roundToNearestPlate(oneRepMax * (weightPercentage / 100)),
         completed: false
       });
     } else {
       // Odd workouts: Single-rep focused (8x1 at 90% 1RM)
       workouts.push({
-        id: i.toString(),
+        id: i + 1,
         reps: 1,
         setCount: 8,
+        sets: generateWorkoutSets(8),
         weight: roundToNearestPlate(oneRepMax * 0.9), // 90% of 1RM
         completed: false
       });
@@ -34,3 +36,10 @@ export function generateWorkoutPlan(oneRepMax: number): Workout[] {
 
   return workouts;
 }
+
+export const generateWorkoutSets = (setCount: number): Sets[] => {
+  return Array.from({ length: setCount }, (_, index) => ({
+    id: index + 1,
+    completed: false
+  }));
+};

@@ -18,6 +18,6 @@ export function formatWeight(weight: number): string {
 }
 
 export function roundToNearestPlate(weight: number): number {
-  // Round up to nearest 2.5kg
-  return Math.ceil(weight / 2.5) * 2.5;
+  // Round to nearest 2.5kg
+  return Math.round(weight / 2.5) * 2.5;
 }

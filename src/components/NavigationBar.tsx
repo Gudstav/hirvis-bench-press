@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -6,7 +7,6 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { Dumbbell, Home, User } from 'lucide-react';
-import { NavLink } from 'react-router';
 import { useScrollDirection } from '@/hooks/useScrollDirection';
 
 export const NavigationBar = () => {
@@ -15,36 +15,49 @@ export const NavigationBar = () => {
   return (
     <NavigationMenu
       className={`
-        w-full p-4 bg-background border rounded-xl fixed bottom-4 left-1/2 transform -translate-x-1/2
+        w-full p-2 backdrop-blur-xl border rounded-lg fixed bottom-4 left-1/2 transform -translate-x-1/2
         transition-transform duration-300
         ${scrollDirection === 'down' ? 'translate-y-[150%]' : 'translate-y-0'}
       `}
     >
       <NavigationMenuList className="flex justify-evenly w-full">
         <NavigationMenuItem className="flex gap-4">
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <NavLink to="/" className="flex items-center gap-2 " viewTransition>
+          <NavLink
+            to="/"
+            className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
+            viewTransition
+          >
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
               <Home className="w-6 h-6" />
-            </NavLink>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <NavLink
-              to="/workouts"
-              className="flex items-center gap-2"
-              viewTransition
+            </NavigationMenuLink>
+          </NavLink>
+          <NavLink
+            to="/workouts"
+            className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
+            viewTransition
+          >
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
             >
               <Dumbbell className="w-6 h-6" />
-            </NavLink>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <NavLink
-              to="/profile"
-              className="flex items-center gap-2"
-              viewTransition
+            </NavigationMenuLink>
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
+            viewTransition
+          >
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
             >
               <User className="w-6 h-6" />
-            </NavLink>
-          </NavigationMenuLink>
+            </NavigationMenuLink>
+          </NavLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

@@ -1,17 +1,15 @@
 export type Sets = {
-  reps: number;
-  setCount: number;
-  weight: number;
+  id: number;
   completed: boolean;
 };
 
 export interface Workout {
   reps: number;
   setCount: number;
-  sets?: Sets[];
+  sets: Sets[];
   weight: number;
   completed: boolean;
-  id: string;
+  id: number;
   date?: string;
 }
 
@@ -24,4 +22,5 @@ export interface WorkoutState {
 export type WorkoutAction =
   | { type: 'SET_1RM'; payload: number }
   | { type: 'TOGGLE_WORKOUT'; payload: number }
+  | { type: 'TOGGLE_SET'; payload: { workoutId: number; setId: number } }
   | { type: 'RESET_PROGRESS' };

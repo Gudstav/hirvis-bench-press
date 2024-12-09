@@ -4,8 +4,8 @@ import { useWorkout } from '@/context/WorkoutContext';
 export const Workouts = () => {
   const { state, dispatch } = useWorkout();
 
-  const handleToggleWorkout = (index: number) => {
-    dispatch({ type: 'TOGGLE_WORKOUT', payload: index });
+  const handleToggleWorkout = (id: number) => {
+    dispatch({ type: 'TOGGLE_WORKOUT', payload: id });
   };
 
   const handleReset = () => {
@@ -15,6 +15,7 @@ export const Workouts = () => {
   return (
     <WorkoutList
       workouts={state.workouts}
+      currentWorkout={state.currentWorkout}
       onToggleWorkout={handleToggleWorkout}
       onReset={handleReset}
     />

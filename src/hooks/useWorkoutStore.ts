@@ -7,7 +7,7 @@ const STORAGE_KEY = 'bench-press-tracker';
 const initialState: WorkoutState = {
   oneRepMax: 0,
   workouts: [],
-  currentWorkout: 0
+  currentWorkout: 1
 };
 
 export function useWorkoutStore() {

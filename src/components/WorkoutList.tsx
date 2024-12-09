@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ChevronRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,20 +5,34 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Workout } from '@/types/workout';
 import { RotateCcw } from 'lucide-react';
-import { formatWeight } from '@/lib/utils';
-import { NavLink } from 'react-router';
+import { cn, formatWeight } from '@/lib/utils';
+import { Link } from 'react-router';
+import { useEffect, useRef } from 'react';
 
 interface WorkoutListProps {
   workouts: Workout[];
+  currentWorkout: number;
   onToggleWorkout: (index: number) => void;
   onReset: () => void;
 }
 
 export function WorkoutList({
   workouts,
+  currentWorkout,
   onToggleWorkout,
   onReset
 }: WorkoutListProps) {
+  const currentWorkoutRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (currentWorkoutRef.current) {
+      currentWorkoutRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  }, [currentWorkout]);
+
   const completedWorkouts = workouts.filter(w => w.completed).length;
   const progress = (completedWorkouts / workouts.length) * 100;
 
@@ -43,34 +56,45 @@ export function WorkoutList({
             style={{ width: `${progress}%` }}
           />
         </div>
-        <ScrollArea className="pr-4">
+        <ScrollArea>
           <div className="space-y-4">
-            {workouts.map((workout, index) => (
+            {workouts.map(workout => (
               <div
-                key={index}
-                className="flex items-center space-x-4 p-4 border rounded-lg hover:bg-accent transition-colors"
+                key={workout.id}
+                ref={
+                  workout.id === currentWorkout ? currentWorkoutRef : undefined
+                }
+                className="flex items-center space-x-4 px-4 border rounded-lg hover:bg-accent transition-colors"
               >
                 <Checkbox
-                  id={`workout-${index}`}
+                  id={`workout-${workout.id}`}
+                  disabled={workout.id > currentWorkout}
                   checked={workout.completed}
-                  onCheckedChange={() => onToggleWorkout(index)}
+                  onCheckedChange={() => onToggleWorkout(workout.id)}
                 />
-                <label htmlFor={`workout-${index}`} className="flex-1">
-                  <h4 className="font-medium">
+                <label
+                  htmlFor={`workout-${workout.id}`}
+                  className="flex-1 py-4 cursor-pointer"
+                >
+                  <h4
+                    className={cn(
+                      'font-medium',
+                      workout.id > currentWorkout && 'text-muted-foreground'
+                    )}
+                  >
                     {workout.setCount}x{workout.reps} @{' '}
                     {formatWeight(workout.weight)}
                   </h4>
-                  {workout.completed && workout.date && (
-                    <p className="text-sm text-muted-foreground">
-                      Completed on {format(new Date(workout.date), 'PPP')}
-                    </p>
-                  )}
                 </label>
-                <NavLink to={`/workouts/${workout.id}`}>
-                  <Button variant="outline" size="icon">
+                <Link to={`/workouts/${workout.id}`} viewTransition>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    disabled={workout.id > currentWorkout}
+                  >
                     <ChevronRight />
                   </Button>
-                </NavLink>
+                </Link>
               </div>
             ))}
           </div>
