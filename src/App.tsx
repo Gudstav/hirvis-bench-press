@@ -1,4 +1,4 @@
-import { OneRepMaxForm } from '@/components/OneRepMaxForm';
+import { Home } from './pages/Home';
 import { Workouts } from './pages/Workouts';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { Layout } from './components/Layout';
@@ -14,7 +14,7 @@ function App() {
         <BrowserRouter basename="/hirvis-bench-press">
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route path="/" element={<OneRepMaxForm />} />
+              <Route path="/" element={<Home />} />
               <Route path="/workouts" element={<Workouts />} />
               <Route path="/workouts/:id" element={<Workout />} />
               <Route path="/profile" element={<Profile />} />

@@ -28,5 +28,14 @@ export function useWorkout() {
   if (context === undefined) {
     throw new Error('useWorkout must be used within a WorkoutProvider');
   }
-  return context;
+
+  const getCurrentWorkout = () => {
+    const workoutIndex = context.state.currentWorkout - 1;
+    return context.state.workouts[workoutIndex];
+  };
+
+  return {
+    ...context,
+    getCurrentWorkout
+  };
 }
