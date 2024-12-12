@@ -4,8 +4,8 @@ import { roundToNearestPlate } from './utils';
 export function generateWorkoutPlan(oneRepMax: number): Workout[] {
   const workouts: Workout[] = [];
 
-  // Generate 16 workouts alternating between high-rep and single-rep focused
-  for (let i = 0; i < 16; i++) {
+  // Generate 15 workouts alternating between high-rep and single-rep focused
+  for (let i = 0; i < 15; i++) {
     if (i % 2 === 0) {
       // Even workouts: High-rep focused (8x8 to 1x1)
       const setCount = 8 - Math.floor(i / 2);
