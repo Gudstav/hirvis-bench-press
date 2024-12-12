@@ -64,37 +64,47 @@ export function WorkoutList({
                 ref={
                   workout.id === currentWorkout ? currentWorkoutRef : undefined
                 }
-                className="flex items-center space-x-4 px-4 border rounded-lg hover:bg-accent transition-colors"
+                className="border rounded-lg hover:bg-accent transition-colors overflow-hidden"
               >
-                <Checkbox
-                  id={`workout-${workout.id}`}
-                  disabled={workout.id > currentWorkout}
-                  checked={workout.completed}
-                  onCheckedChange={() => onToggleWorkout(workout.id)}
-                />
-                <label
-                  htmlFor={`workout-${workout.id}`}
-                  className="flex-1 py-4 cursor-pointer"
-                >
-                  <h4
-                    className={cn(
-                      'font-medium',
-                      workout.id > currentWorkout && 'text-muted-foreground'
-                    )}
-                  >
-                    {workout.setCount}x{workout.reps} @{' '}
-                    {formatWeight(workout.weight)}
-                  </h4>
-                </label>
-                <Link to={`/workouts/${workout.id}`} viewTransition>
-                  <Button
-                    variant="outline"
-                    size="icon"
+                <div className="px-4 flex items-center space-x-4">
+                  <Checkbox
+                    id={`workout-${workout.id}`}
                     disabled={workout.id > currentWorkout}
+                    checked={workout.completed}
+                    onCheckedChange={() => onToggleWorkout(workout.id)}
+                  />
+                  <label
+                    htmlFor={`workout-${workout.id}`}
+                    className="flex-1 py-4 cursor-pointer"
                   >
-                    <ChevronRight />
-                  </Button>
-                </Link>
+                    <h4
+                      className={cn(
+                        'font-medium',
+                        workout.id > currentWorkout && 'text-muted-foreground'
+                      )}
+                    >
+                      {workout.setCount}x{workout.reps} @{' '}
+                      {formatWeight(workout.weight)}
+                    </h4>
+                  </label>
+                  <Link to={`/workouts/${workout.id}`} viewTransition>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      disabled={workout.id > currentWorkout}
+                    >
+                      <ChevronRight />
+                    </Button>
+                  </Link>
+                </div>
+                {!workout.completed && (
+                  <div
+                    className="h-0.5 bg-primary transition-all duration-300"
+                    style={{
+                      width: `${getProgress(workout)}%`
+                    }}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -103,3 +113,8 @@ export function WorkoutList({
     </Card>
   );
 }
+
+const getProgress = (workout: Workout) => {
+  const completedSets = workout.sets.filter(set => set.completed).length;
+  return (completedSets / (workout?.setCount ?? 0)) * 100;
+};
