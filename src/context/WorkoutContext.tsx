@@ -30,8 +30,8 @@ export function useWorkout() {
   }
 
   const getCurrentWorkout = () => {
-    const workoutIndex = context.state.currentWorkout - 1;
-    return context.state.workouts[workoutIndex];
+    const workoutId = context.state.currentWorkout;
+    return context.state.workouts.find(workout => workout.id === workoutId);
   };
 
   return {
