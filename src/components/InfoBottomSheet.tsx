@@ -38,10 +38,10 @@ export const HowItWorks = () => {
   return (
     <>
       <p className="mb-4">
-        The idea is to do 2 bench press workouts per week. One that starts with
-        high volume reps and progressivly gets heavier with fewer reps. The
-        other one focusing on single repetitions to get used do performing
-        heavier singles. Always focusing on technique.
+        The idea is to do two bench press workouts per week. One workout starts
+        with high-volume reps and progressively gets heavier with fewer reps.
+        The other focuses on building strength and confidence by performing
+        heavier singles, always prioritizing proper technique.
       </p>
       <Table className="px-4">
         <TableHeader>
