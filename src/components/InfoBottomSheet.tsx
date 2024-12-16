@@ -19,7 +19,7 @@ import {
 export const InfoBottomSheet = () => {
   return (
     <Sheet>
-      <SheetTrigger asChild>
+      <SheetTrigger aria-label="View program information">
         <CircleHelp className="w-4 h-4 cursor-pointer" />
       </SheetTrigger>
       <SheetContent className="max-w-lg mx-auto" side="bottom">
@@ -37,12 +37,12 @@ export const InfoBottomSheet = () => {
 export const HowItWorks = () => {
   return (
     <>
-      <p className="mb-4">
+      <div className="mb-4">
         The idea is to do two bench press workouts per week. One workout starts
         with high-volume reps and progressively gets heavier with fewer reps.
         The other focuses on building strength and confidence by performing
         heavier singles, always prioritizing proper technique.
-      </p>
+      </div>
       <Table className="px-4">
         <TableHeader>
           <TableRow>

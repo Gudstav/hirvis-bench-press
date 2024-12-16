@@ -26,36 +26,39 @@ export const NavigationBar = () => {
             to="/"
             className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
             viewTransition
+            aria-label="Home"
           >
             <NavigationMenuLink
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <Home className="w-6 h-6" />
+              <Home className="w-6 h-6" aria-hidden="true" />
             </NavigationMenuLink>
           </NavLink>
           <NavLink
             to="/workouts"
             className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
             viewTransition
+            aria-label="Workouts"
           >
             <NavigationMenuLink
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <Dumbbell className="w-6 h-6" />
+              <Dumbbell className="w-6 h-6" aria-hidden="true" />
             </NavigationMenuLink>
           </NavLink>
           <NavLink
             to="/profile"
             className={({ isActive }) => `${isActive ? 'text-primary' : ''}`}
             viewTransition
+            aria-label="Profile"
           >
             <NavigationMenuLink
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <User className="w-6 h-6" />
+              <User className="w-6 h-6" aria-hidden="true" />
             </NavigationMenuLink>
           </NavLink>
         </NavigationMenuItem>

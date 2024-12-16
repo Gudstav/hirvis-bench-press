@@ -25,14 +25,23 @@ export const Home = () => {
 
           <CardContent>
             <div className="flex items-center space-x-4 px-4 border rounded-lg hover:bg-accent transition-colors">
-              <Link to="/workouts" className="py-4 flex-1" viewTransition>
+              <Link
+                to="/workouts"
+                className="py-4 flex-1"
+                viewTransition
+                aria-label="View workout"
+              >
                 <h4 className="font-medium text-white">
                   {currentWorkout.setCount}x{currentWorkout.reps} @{' '}
                   {formatWeight(currentWorkout.weight)}
                 </h4>
               </Link>
-              <Link to={`/workouts/${currentWorkout.id}`} viewTransition>
-                <Button variant="outline" size="icon">
+              <Link
+                to={`/workouts/${currentWorkout.id}`}
+                viewTransition
+                aria-label="View workout"
+              >
+                <Button variant="outline" size="icon" aria-label="View workout">
                   <ChevronRight />
                 </Button>
               </Link>
