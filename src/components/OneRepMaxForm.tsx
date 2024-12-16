@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dumbbell } from 'lucide-react';
 import { roundToNearestPlate } from '@/lib/utils';
 import { useWorkout } from '@/context/WorkoutContext';
+import { InfoBottomSheet } from './InfoBottomSheet';
 
 export function OneRepMaxForm() {
   const { state, dispatch } = useWorkout();
@@ -40,6 +41,9 @@ export function OneRepMaxForm() {
         <CardTitle className="flex items-center gap-2">
           <Dumbbell className="w-6 h-6" />
           Enter Your 1 Rep Max
+          <div className="ml-auto">
+            <InfoBottomSheet />
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent>

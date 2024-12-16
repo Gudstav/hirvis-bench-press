@@ -1,3 +1,4 @@
+import { HowItWorks } from '@/components/InfoBottomSheet';
 import { OneRepMaxForm } from '@/components/OneRepMaxForm';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import {
@@ -6,14 +7,8 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { useWorkout } from '@/context/WorkoutContext';
 
 export const Profile = () => {
-  const { state } = useWorkout();
-  const oneRepMax = state.oneRepMax;
-
-  console.log(oneRepMax);
-
   return (
     <Accordion type="multiple">
       <AccordionItem value="item-1">
@@ -26,6 +21,12 @@ export const Profile = () => {
         <AccordionTrigger>Theme</AccordionTrigger>
         <AccordionContent>
           <ThemeToggle />
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>How it works</AccordionTrigger>
+        <AccordionContent className="max-w-lg mx-auto text-center">
+          <HowItWorks />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
