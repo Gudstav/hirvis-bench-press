@@ -40,27 +40,30 @@ export function workoutReducer(
         currentWorkout: lastCompletedWorkout + 1
       };
     }
-    case 'TOGGLE_SET':
+    case 'TOGGLE_SET': {
       return {
         ...state,
         workouts: state.workouts.map(workout =>
           workout.id === action.payload.workoutId
             ? {
                 ...workout,
-                completed: workout.sets.every(set =>
-                  set.id === action.payload.setId
-                    ? !set.completed
-                    : set.completed
-                ),
                 sets: workout.sets.map(set =>
                   set.id === action.payload.setId
                     ? { ...set, completed: !set.completed }
                     : set
-                )
+                ),
+                completed: workout.sets
+                  .map(set =>
+                    set.id === action.payload.setId
+                      ? { ...set, completed: !set.completed }
+                      : set
+                  )
+                  .every(set => set.completed)
               }
             : workout
         )
       };
+    }
     case 'RESET_PROGRESS':
       return {
         ...state,
