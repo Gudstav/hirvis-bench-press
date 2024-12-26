@@ -71,23 +71,23 @@ export function WorkoutList({
                     id={`workout-${workout.id}`}
                     disabled={workout.id > currentWorkout}
                     checked={workout.completed}
+                    className="h-5 w-5"
                     onCheckedChange={() => onToggleWorkout(workout.id)}
                   />
-                  <label
-                    htmlFor={`workout-${workout.id}`}
-                    className="flex-1 py-4 cursor-pointer"
+                  <Link
+                    to={`/workouts/${workout.id}`}
+                    className="flex items-center justify-between w-full"
+                    viewTransition
                   >
                     <h4
                       className={cn(
-                        'font-medium',
+                        'font-medium text-white py-4',
                         workout.id > currentWorkout && 'text-muted-foreground'
                       )}
                     >
                       {workout.setCount}x{workout.reps} @{' '}
                       {formatWeight(workout.weight)}
                     </h4>
-                  </label>
-                  <Link to={`/workouts/${workout.id}`} viewTransition>
                     <Button
                       variant="outline"
                       size="icon"
